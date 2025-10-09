@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Landingpage } from './landingpage';
+import { Imprint } from './imprint';
 
-describe('Landingpage', () => {
-  let component: Landingpage;
-  let fixture: ComponentFixture<Landingpage>;
+describe('Imprint', () => {
+  let component: Imprint;
+  let fixture: ComponentFixture<Imprint>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Landingpage]
+      imports: [Imprint]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Landingpage);
+    fixture = TestBed.createComponent(Imprint);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
