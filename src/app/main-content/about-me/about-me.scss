@@ -1,0 +1,32 @@
+@import '../../../styles.scss';
+
+
+
+  .content {
+    display: flex;
+    justify-content: center;
+    padding-left: 10em;
+    width: 100%;
+    max-width: 1920px;
+    margin: 10em 0;
+  }
+  .aboutmeleft {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-right: 15em;
+  }
+
+  .aboutmeright {
+    padding-right: 10em;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 3.5em;
+
+    .profilpic {
+      width: 550px;
+    }
+  }
+
