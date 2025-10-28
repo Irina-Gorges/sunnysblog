@@ -1,10 +1,11 @@
+//#region SCSS old
 //import font from google
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900');
 
 // Farben
-$primary-color   : #064052;
-$secondary-color : #ffffffa8;
-$form-bg         : #102e47;
+$primary-color: #064052;
+$secondary-color: #ffffffa8;
+$form-bg: #102e47;
 
 // Mixins ersetzen
 @mixin transition($args...) {
@@ -20,11 +21,17 @@ $form-bg         : #102e47;
 }
 
 // Kontaktformular
+
+.col-sm-12 {
+  display: flex;
+  justify-content: center;
+}
+
 .contact-form {
-  margin-top: 30px;
+  margin-top: 80px;
 
   .input-block {
-    background-color: rgb(4, 39, 71); 
+    background-color: rgb(4, 39, 71);
     border: solid 1px $primary-color;
     width: 100%;
     height: 40px;
@@ -39,10 +46,10 @@ $form-bg         : #102e47;
     }
 
     &.textarea {
-      height: auto;
+      height: 160px;
 
       .form-control {
-        height: auto;
+        height: 150px;
         resize: none;
       }
     }
@@ -66,10 +73,12 @@ $form-bg         : #102e47;
       border: none;
       @include border-radius(0);
       @include box-shadow(none);
-      height: auto;
+      height: 40px;
+      width: 100%;
       position: relative;
       z-index: 2;
       font-size: 16px;
+      bottom: 20px;
       color: $secondary-color;
     }
 
@@ -88,9 +97,9 @@ $form-bg         : #102e47;
     @include border-radius(4px);
     @include transition(all 0.3s ease);
     padding: 0 60px;
-    height: 40px;
+    height: 45px;
     border: none;
-    width: 100%;
+    width: 20%;
 
     &:hover,
     &:focus {
@@ -106,42 +115,263 @@ $form-bg         : #102e47;
     margin: auto;
   }
 }
+//#endregion
 
+@import '../../../styles.scss';
+// @import "../../../shared/mixins.scss";
 
+section {
+  height: 100vh;
+  margin-top: 4em;
+  display: flex;
+  justify-content: center;
+ 
+  .container {
+    width: 40%;
+    
 
+    .success-message {
+      color: #70e61c;
+      font-size: 17px;
+      text-align: center;
+      margin-top: 15px;
+      animation: fadeIn 0.4s ease-in;
+    }
 
+    .error-message {
+      color: #e61c40;
+      font-size: 17px;
+      text-align: center;
+      margin-top: 15px;
+      animation: fadeIn 0.4s ease-in;
+    }
 
-//////////////////////////
-  /*----page styles---*/
-//////////////////////////
-// body{
-//   @include background-image(linear-gradient(to right, $primary-color, #DD2476));
-//   font-family: 'Roboto', sans-serif;
-// }
-// .contact-wrap{
-//   padding: 15px;
-// }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    form {
+      border-radius: 5px;
+      width: 100%;
 
-// h1{
-//   background-color: white;
-//   color: lighten($primary-color, 10%);
-//   padding: 40px;
-//   margin: 0 0 50px;
-//   font-size: 30px;
-//   text-transform: uppercase;
-//   font-weight: 700;
-//   text-align: center;
-//   small{
-//     font-size: 18px;
-//     display: block;
-//     text-transform: none;
-//     font-weight: 300;
-//     margin-top: 10px;
-//     color: lighten($primary-color, 10%);
-//   }
-// }
+      span {
+        font-weight: 200;
+        font-size: 16px;
+        color: #e61c40;
+      }
 
+      .input-icon-wrapper {
+        position: relative;
 
+        input,
+        select,
+        textarea {
+          width: 100%;
+          padding: 12px;
+          padding-right: 2.5em; // Platz für Icon
+          border: 2px solid #5bd7fd;
+          border-radius: 10px;
+          box-sizing: border-box;
+          margin-top: 16px;
+          margin-bottom: 6px;
+          resize: vertical;
+          background-color: #ffffff;
+          outline: none;
+          transition: border-color 0.3s;
+        }
 
+        input:focus,
+        textarea:focus,
+        input:hover,
+        textarea:hover {
+          border: 2px solid #70e61c;
+          background-color: #d1d1d1;
+        }
 
+        input.error,
+        textarea.error {
+          border: 2px solid #e61c40 !important;
+          background-color: #ffffff;
+        }
 
+        input.success,
+        textarea.success {
+          border: 2px solid #70e61c !important;
+          background-color: #ffffff;
+        }
+
+        .icon-indicator {
+          position: absolute;
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 20px;
+          height: 20px;
+          pointer-events: none;
+        }
+      }
+
+      input[type='email'] {
+        @extend input; // Reuse the general input styles
+      }
+
+      /* Container der Checkbox */
+      .custom-checkbox {
+        cursor: pointer;
+        position: relative;
+        padding-left: 32px;
+        font-size: 16px;
+        font-weight: 300;
+        user-select: none;
+      }
+
+      /* Verstecke das native Checkbox-Eingabefeld */
+      .custom-checkbox input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* Gestalte die sichtbare Box */
+      .custom-checkbox .checkmark {
+        position: absolute;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border: 2px solid $green; /* Grüner Rand */
+        background-color: transparent;
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+      }
+
+      /* Haken anzeigen, wenn gecheckt */
+      .custom-checkbox input:checked ~ .checkmark {
+        _background-color: $green; /* Grüner Hintergrund */
+        border-color: $green;
+      }
+
+      /* Haken-Stil */
+      .custom-checkbox .checkmark::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 12px;
+        border: solid $green;
+        border-width: 0 2px 2px 0;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      /* Wenn gecheckt, zeige den Haken */
+      .custom-checkbox input:checked ~ .checkmark::after {
+        display: block;
+        color: $green;
+      }
+
+      /* Optional: Link-Stil anpassen */
+      .custom-checkbox a {
+        color: #5bd7fd;
+        text-decoration: underline;
+        margin-left: 4px;
+      }
+
+      .btn-formular {
+        display: flex;
+        justify-content: center;
+
+        .enabled-button {
+          margin-top: 25px;
+          font-size: 28px;
+          border-radius: 10px;
+          border: none;
+          padding: 6px 30px;
+          background-color: $green;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.075);
+          color: white;
+          cursor: pointer;
+
+          @media (max-width: 320px) {
+            font-size: 24px;
+            padding: 8px 24px;
+          }
+
+          @media (min-width: 321px) and (max-width: 359px) {
+            font-size: 24px;
+            padding: 8px 24px;
+          }
+        }
+
+        .disabled-button {
+          margin-top: 25px;
+          font-size: 26px;
+          border-radius: 10px;
+          border: none;
+          padding: 10px 30px;
+          background-color: #b6b6b6;
+          color: white;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.075);
+          cursor: not-allowed;
+
+          @media (max-width: 320px) {
+            font-size: 24px;
+            padding: 8px 24px;
+          }
+
+          @media (min-width: 321px) and (max-width: 359px) {
+            font-size: 24px;
+            padding: 8px 24px;
+          }
+        }
+      }
+    }
+
+    .scroll-up {
+      display: flex;
+      justify-content: end;
+      padding: 3em 1em 3em 0;
+
+      #scrollUpBtn {
+        position: relative;
+        width: 38px;
+        height: 38px;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        .default-img,
+        .hover-img {
+          position: absolute;
+          width: 38px;
+          height: 38px;
+          transition: opacity 0.25s ease;
+        }
+
+        .default-img {
+          opacity: 1;
+        }
+
+        .hover-img {
+          opacity: 0;
+        }
+
+        &:hover .default-img {
+          opacity: 0;
+        }
+
+        &:hover .hover-img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

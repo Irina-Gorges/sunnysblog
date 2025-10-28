@@ -1,3 +1,5 @@
+$green: #70e61c;
+
 *{
   margin: 0;
   padding: 0;
@@ -8,11 +10,10 @@
 } 
 
 body {
-    height: 100dvh;
-    background-image: url('../public/assetts/img/background.webp');
+    background-image: url('../public/assets/img/background.webp');
     background-repeat: no-repeat;
     background-size: cover;
-    backdrop-filter: blur(1px) brightness(25%);
+    backdrop-filter: blur(1px) brightness(75%);
 }
 
 /* poppins-regular - latin */
@@ -21,5 +22,5 @@ body {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: url('../public/assetts/fonts/Poppins-Regular.ttf') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../public/assets/fonts/Poppins-Regular.ttf') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }

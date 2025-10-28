@@ -1,37 +1,132 @@
-<section class="contact-wrap">
-  <form action="" class="contact-form">
-    <div class="col-sm-6">
-      <div class="input-block">
-        <label for="">First Name</label>
-        <input type="text" class="form-control">
-      </div>
+<section id="contact">
+    <div class="container">
+        <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+            <!-- Name -->
+            <div class="required">
+                <div class="input-icon-wrapper">
+                    <label for="yname"></label>
+                    <input #nameModel="ngModel" [(ngModel)]="contactData.name" (ngModelChange)="onInputChange()"
+                        type="text" id="yname" name="name" [placeholder]="translate[lang].placeholders.name" required
+                        minlength="4" [class.error]="isInvalid(nameModel)" [class.success]="isValid(nameModel)" />
+                    <!-- Fehler-Icon -->
+                     @if (getIconType(nameModel) === 'error'){
+                    <img src="assets/img/error.png" alt="Error"
+                        class="icon-indicator" />
+                      }
+
+                    <!-- Erfolgs-Icon -->
+                     @if (getIconType(nameModel) === 'success'){
+                    <img src="assets/img/done.png" alt="Success"
+                        class="icon-indicator" />
+                      }
+                </div>
+                @if (getErrorMessage(nameModel, 'name')){
+                    <span>
+                        {{ getErrorMessage(nameModel, 'name') }}
+                    </span>
+                }
+            </div>
+
+            <!-- Email -->
+            <div class="required">
+                <div class="input-icon-wrapper">
+                    <label for="email"></label>
+                    <input #emailModel="ngModel" [(ngModel)]="contactData.email" (ngModelChange)="onInputChange()"
+                        type="email" id="email" name="email" [placeholder]="translate[lang].placeholders.email" required
+                        minlength="4" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                        [class.error]="isInvalid(emailModel)" [class.success]="isValid(emailModel)" />
+                    <!-- Fehler-Icon -->
+                     @if (getIconType(emailModel) === 'error'){
+                    <img src="assets/img/error.png" alt="Error"
+                        class="icon-indicator" />
+                      }
+                   
+
+                    <!-- Erfolgs-Icon -->
+                     @if (getIconType(emailModel) === 'success'){
+                    <img src="assets/img/done.png" alt="Success"
+                        class="icon-indicator" />
+                     }
+                </div>
+                @if (getErrorMessage(emailModel, 'email')){
+                    <span>
+                        {{ getErrorMessage(emailModel, 'email') }}
+                    </span>
+                }
+            </div>
+
+            <!-- Message -->
+            <div class="required">
+                <div class="input-icon-wrapper">
+                    <label for="message"></label>
+                    <textarea #messageModel="ngModel" [(ngModel)]="contactData.message"
+                        (ngModelChange)="onInputChange()" id="message" name="message"
+                        [placeholder]="translate[lang].placeholders.message" style="height: 200px" required
+                        minlength="4" [class.error]="isInvalid(messageModel)"
+                        [class.success]="isValid(messageModel)"></textarea>
+                </div>
+                <!-- Fehler-Icon -->
+                @if (getIconType(messageModel) === 'error'){
+                    <img src="assets/img/error.png" alt="Error"
+                        class="icon-indicator" />
+                      }
+
+                @if (getIconType(messageModel) === 'success'){
+                    <img src="assets/img/done.png" alt="Success"
+                        class="icon-indicator" />
+                }
+                @if (getErrorMessage(messageModel, 'message')){
+                    <span>
+                        {{ getErrorMessage(messageModel, 'message') }}
+                    </span>
+                }
+
+                <div class="required checkbox-privacy">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="privacy" name="privacy" [(ngModel)]="contactData.acceptedPrivacy"
+                            (ngModelChange)="onInputChange()" required />
+                        <span class="checkmark"></span>
+                        {{lang === 'DE' ? 'Ich habe die' : "I've read the"}}
+                        <a [routerLink]="['/privacy']">
+                            {{translate[lang].privacyPolicy || 'privacy policy'}}
+                        </a>
+                        &nbsp;{{lang === 'DE' ? 'gelesen und stimme der Bearbeitung meiner Daten zu.' : 'and agree to the processing of my data as outlined.'}}
+                    </label>
+                    @if (contactForm.submitted && !contactData.acceptedPrivacy){
+                        <img src="assets/img/error.png" alt="Error"
+                        class="icon-indicator" />
+                    }
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="btn-formular">
+                <button type="submit" [disabled]="
+                                    !contactForm.valid ||
+                                    !contactData.acceptedPrivacy
+                                " [class.enabled-button]="
+                                    contactForm.valid &&
+                                    contactData.acceptedPrivacy
+                                " [class.disabled-button]="
+                                    !contactForm.valid ||
+                                    !contactData.acceptedPrivacy
+                                ">
+                    {{translate[lang].submit}}
+                </button>
+            </div>
+        </form>
+        <!-- Erfolgsmeldung -->
+        @if (formIsSent){
+            <div class="success-message">
+                {{translate[lang].success}}
+            </div>
+        }
+        
+        <!-- Fehlermeldung -->
+        @if (formHasError){
+            <div class="error-message">
+                {{lang === 'DE' ? 'Fehler beim Senden der Nachricht. Bitte versuche es später erneut.' : 'Error sending message. Please try again later.'}}
+            </div>
+        }
     </div>
-    <div class="col-sm-6">
-      <div class="input-block">
-        <label for="">Last Name</label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="input-block">
-        <label for="">Email</label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="input-block">
-        <label for="">Message Subject</label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="input-block textarea">
-        <label for="">Drop your message here</label>
-        <textarea rows="3" type="text" class="form-control"></textarea>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <button class="square-button">Send</button>
-    </div>
-  </form>
 </section>
